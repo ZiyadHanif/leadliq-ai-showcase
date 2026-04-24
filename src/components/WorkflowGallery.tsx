@@ -303,6 +303,11 @@ export function WorkflowGallery() {
             ))}
           </div>
         </div>
+
+        {/* Animated flow diagram — updates with active tab */}
+        <div className="mt-8">
+          <FlowDiagram steps={current.flow} activeKey={current.id} />
+        </div>
       </div>
     </section>
   );

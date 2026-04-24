@@ -1,4 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export type FlowStep = {
@@ -13,6 +16,39 @@ type Props = {
 };
 
 export function FlowDiagram({ steps, activeKey }: Props) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "center",
+    containScroll: "trimSnaps",
+    loop: false,
+  });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(false);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+      setCanPrev(emblaApi.canScrollPrev());
+      setCanNext(emblaApi.canScrollNext());
+    };
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi]);
+
+  // Reset to first step when workflow changes
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.scrollTo(0, true);
+      setSelectedIndex(0);
+    }
+  }, [activeKey, emblaApi]);
+
   return (
     <div className="relative overflow-hidden rounded-3xl border border-border bg-surface/40 p-6 backdrop-blur-xl md:p-10">
       <div className="absolute inset-0 grid-bg opacity-20" />
@@ -41,7 +77,6 @@ export function FlowDiagram({ steps, activeKey }: Props) {
         >
           {/* Desktop: horizontal flow */}
           <div className="relative hidden md:block">
-            {/* connector line behind nodes */}
             <div className="absolute left-[6%] right-[6%] top-1/2 h-px -translate-y-1/2 bg-border" />
             <motion.div
               key={`line-${activeKey}`}
@@ -52,7 +87,6 @@ export function FlowDiagram({ steps, activeKey }: Props) {
               className="absolute left-[6%] right-[6%] top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-primary via-primary-glow to-primary shadow-glow"
             />
 
-            {/* traveling pulse */}
             <motion.div
               key={`pulse-${activeKey}`}
               initial={{ left: "6%", opacity: 0 }}
@@ -112,44 +146,112 @@ export function FlowDiagram({ steps, activeKey }: Props) {
             </div>
           </div>
 
-          {/* Mobile: vertical flow */}
-          <div className="relative space-y-4 md:hidden">
-            <div className="absolute bottom-4 left-7 top-4 w-px bg-border" />
-            <motion.div
-              key={`v-line-${activeKey}`}
-              initial={{ scaleY: 0 }}
-              animate={{ scaleY: 1 }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              style={{ transformOrigin: "top" }}
-              className="absolute bottom-4 left-7 top-4 w-px bg-gradient-to-b from-primary via-primary-glow to-primary"
-            />
-            {steps.map((step, i) => {
-              const Icon = step.Icon;
-              return (
-                <motion.div
-                  key={step.label}
-                  initial={{ opacity: 0, x: -14 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + i * 0.1, duration: 0.45 }}
-                  className="relative flex items-center gap-4"
-                >
-                  <div className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-primary/40 bg-background">
-                    <Icon className="h-5 w-5 text-primary" />
-                    <div className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary font-mono text-[9px] font-bold text-primary-foreground">
-                      {i + 1}
+          {/* Mobile: swipeable horizontal carousel */}
+          <div className="relative md:hidden">
+            {/* Step counter */}
+            <div className="mb-4 flex items-center justify-between">
+              <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                Step {selectedIndex + 1} / {steps.length}
+              </div>
+              <div className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                Swipe →
+              </div>
+            </div>
+
+            {/* Embla viewport */}
+            <div className="overflow-hidden -mx-2" ref={emblaRef}>
+              <div className="flex">
+                {steps.map((step, i) => {
+                  const Icon = step.Icon;
+                  const isActive = i === selectedIndex;
+                  return (
+                    <div
+                      key={step.label}
+                      className="min-w-0 flex-[0_0_85%] px-2"
+                    >
+                      <motion.div
+                        animate={{
+                          scale: isActive ? 1 : 0.94,
+                          opacity: isActive ? 1 : 0.5,
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="relative flex flex-col items-center rounded-2xl border border-border bg-background/60 p-6 text-center backdrop-blur-sm"
+                      >
+                        <motion.div
+                          animate={
+                            isActive
+                              ? {
+                                  boxShadow: [
+                                    "0 0 0px oklch(0.92 0.22 130 / 0)",
+                                    "0 0 40px oklch(0.92 0.22 130 / 0.6)",
+                                    "0 0 0px oklch(0.92 0.22 130 / 0)",
+                                  ],
+                                }
+                              : {}
+                          }
+                          transition={{ duration: 2.4, repeat: Infinity }}
+                          className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-primary/40 bg-background"
+                        >
+                          <Icon className="h-8 w-8 text-primary" />
+                          <div className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-primary font-mono text-[11px] font-bold text-primary-foreground">
+                            {i + 1}
+                          </div>
+                        </motion.div>
+                        <div className="mt-5 font-display text-base font-semibold text-foreground">
+                          {step.label}
+                        </div>
+                        <div className="mt-2 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                          {step.sub}
+                        </div>
+                      </motion.div>
                     </div>
-                  </div>
-                  <div>
-                    <div className="font-display text-sm font-semibold text-foreground">
-                      {step.label}
-                    </div>
-                    <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-                      {step.sub}
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Controls + dot indicators */}
+            <div className="mt-5 flex items-center justify-between gap-3">
+              <button
+                type="button"
+                onClick={() => emblaApi?.scrollPrev()}
+                disabled={!canPrev}
+                aria-label="Previous step"
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border bg-background/70 text-foreground transition active:scale-95 disabled:opacity-30"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+
+              <div className="flex flex-1 items-center justify-center gap-2">
+                {steps.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => emblaApi?.scrollTo(i)}
+                    aria-label={`Go to step ${i + 1}`}
+                    className="group flex h-8 items-center justify-center px-1"
+                  >
+                    <span
+                      className={`h-2 rounded-full transition-all ${
+                        i === selectedIndex
+                          ? "w-8 bg-primary shadow-glow"
+                          : "w-2 bg-border group-active:bg-muted-foreground"
+                      }`}
+                    />
+                  </button>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => emblaApi?.scrollNext()}
+                disabled={!canNext}
+                aria-label="Next step"
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-primary/40 bg-primary/10 text-primary transition active:scale-95 disabled:opacity-30"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
           </div>
         </motion.div>
       </AnimatePresence>

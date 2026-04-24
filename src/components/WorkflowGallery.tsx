@@ -1,6 +1,11 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { MessageSquare, Workflow, BarChart3, Bot, ArrowUpRight, Check } from "lucide-react";
+import {
+  MessageSquare, Workflow, BarChart3, Bot, ArrowUpRight, Check,
+  Globe, Filter, Database, Send, FileText, Cpu, GitBranch, Bell,
+  LineChart, Sparkles, Mail, Mic, BrainCircuit, PhoneCall, UserCheck,
+} from "lucide-react";
+import { FlowDiagram } from "./FlowDiagram";
 import leadCaptureImg from "@/assets/workflow-leadcapture.jpg";
 import automationImg from "@/assets/workflow-automation.jpg";
 import reportingImg from "@/assets/workflow-reporting.jpg";

@@ -3,25 +3,28 @@ import { useRef } from "react";
 
 const cases = [
   {
-    industry: "E-commerce",
-    metric: "+412%",
-    label: "qualified leads / mo",
-    quote: "LeadLiq replaced our entire SDR team with one AI agent that out-converts them.",
-    author: "B. Marquez, Ops Director",
-  },
-  {
-    industry: "B2B SaaS",
-    metric: "-68%",
-    label: "support cost",
-    quote: "Their AI handles 9 of 10 tickets before a human touches them. Game over.",
-    author: "S. Patel, COO",
-  },
-  {
     industry: "Real Estate",
-    metric: "$2.1M",
-    label: "deals attributed",
-    quote: "We closed 11 listings in 60 days from one workflow they built. Insane ROI.",
-    author: "J. Carter, Broker",
+    metric: "4×",
+    label: "booked appointments / mo",
+    quote:
+      "We were spending $3K/mo on ads with zero system behind them. LeadLiq rebuilt our entire site, set up the AI chatbot, and built our email sequences in 3 weeks. We 4×'d our booked appointments within the first month.",
+    author: "Sarah K., CEO, UrbanNest Realty",
+  },
+  {
+    industry: "Healthcare",
+    metric: "15h",
+    label: "saved per week",
+    quote:
+      "LeadLiq integrated AI into our patient follow-up and rebuilt our WordPress site from scratch. The AI chatbot handles 90% of initial enquiries and books appointments directly into our calendar.",
+    author: "Dr. Michael R., Founder, NovaMed Clinic",
+  },
+  {
+    industry: "Fitness",
+    metric: "-40%",
+    label: "ad cost · 3× leads",
+    quote:
+      "They didn't just build a website — they built a full revenue machine. SEO, Google Ads, WhatsApp automations, and monthly AI content. Our ad cost dropped 40% while leads tripled.",
+    author: "James A., Owner, PeakFlow Fitness",
   },
 ];
 
@@ -48,10 +51,13 @@ export function Results() {
           viewport={{ once: true }}
           className="max-w-3xl mb-20"
         >
-          <div className="font-mono text-xs tracking-widest text-primary uppercase mb-6">— Results</div>
+          <div className="font-mono text-xs tracking-widest text-primary uppercase mb-6">— Real Results</div>
           <h2 className="font-display text-5xl md:text-7xl font-bold tracking-tighter">
-            Numbers that <span className="text-gradient italic font-light">don't lie.</span>
+            What our clients <span className="text-gradient italic font-light">actually say.</span>
           </h2>
+          <p className="mt-6 text-muted-foreground text-lg">
+            No fluff. No fake reviews. Just real business owners who stopped guessing and started growing.
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -71,10 +77,10 @@ export function Results() {
               </div>
               <div className="font-display text-6xl md:text-7xl font-bold text-gradient mb-2">{c.metric}</div>
               <div className="text-sm text-muted-foreground mb-8">{c.label}</div>
-              <blockquote className="text-foreground/90 leading-relaxed border-l-2 border-primary pl-4 mb-4">
+              <blockquote className="text-foreground/90 leading-relaxed border-l-2 border-primary pl-4 mb-4 text-sm">
                 "{c.quote}"
               </blockquote>
-              <div className="text-sm text-muted-foreground">— {c.author}</div>
+              <div className="text-xs text-muted-foreground">— {c.author}</div>
             </motion.div>
           ))}
         </div>

@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import resultsChart from "@/assets/results-chart.jpg";
 
 const cases = [
   {
@@ -35,6 +36,16 @@ export function Results() {
 
   return (
     <section id="results" ref={ref} className="relative py-32 md:py-48 px-6 lg:px-10 overflow-hidden">
+      <img
+        src={resultsChart}
+        alt=""
+        aria-hidden
+        loading="lazy"
+        width={1920}
+        height={1080}
+        className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background pointer-events-none" />
       <motion.div
         style={{ rotate }}
         className="absolute -right-40 top-1/2 w-[600px] h-[600px] rounded-full border border-primary/10 pointer-events-none"

@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import ctaBg from "@/assets/cta-bg.jpg";
 
 export function CTA() {
   const ref = useRef<HTMLDivElement>(null);
@@ -13,6 +14,15 @@ export function CTA() {
         style={{ scale, rotate }}
         className="relative max-w-6xl mx-auto rounded-[2.5rem] md:rounded-[3rem] bg-gradient-primary p-12 md:p-24 text-center overflow-hidden noise"
       >
+        <img
+          src={ctaBg}
+          alt=""
+          aria-hidden
+          loading="lazy"
+          width={1920}
+          height={1080}
+          className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay pointer-events-none"
+        />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,oklch(1_0_0/0.2),transparent_50%)]" />
 
         <motion.div

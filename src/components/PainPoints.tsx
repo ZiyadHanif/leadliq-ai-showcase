@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import painBg from "@/assets/pain-bg.jpg";
 
 const pains = [
   "Manual tasks draining hours your team should spend on revenue-generating work.",
@@ -9,7 +10,17 @@ const pains = [
 
 export function PainPoints() {
   return (
-    <section className="relative py-32 md:py-48 px-6 lg:px-10">
+    <section className="relative py-32 md:py-48 px-6 lg:px-10 overflow-hidden">
+      <img
+        src={painBg}
+        alt=""
+        aria-hidden
+        loading="lazy"
+        width={1920}
+        height={1080}
+        className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background pointer-events-none" />
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}

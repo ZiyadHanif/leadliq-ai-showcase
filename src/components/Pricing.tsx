@@ -2,37 +2,59 @@ import { motion } from "framer-motion";
 
 const plans = [
   {
-    name: "Spark",
-    price: "$2,400",
+    name: "Digital Foundation",
+    price: "$500",
     cadence: "/mo",
-    desc: "For SMBs starting their AI journey.",
-    features: ["1 AI workflow", "Lead capture automation", "Monthly strategy call", "Email support"],
-    cta: "Start with Spark",
+    desc: "Build your online presence the right way.",
+    features: [
+      "AI-Optimized WordPress Build or Rebuild",
+      "Managed Hosting, SSL & Security",
+      "Debugging & Ongoing Maintenance",
+      "Core On-Page SEO",
+      "Google Business Profile Setup",
+      "Digital Presence Optimisation",
+      "8 AI Content Posts /mo",
+      "Monthly Performance Reports",
+    ],
+    cta: "Get Started",
     featured: false,
   },
   {
-    name: "Scale",
-    price: "$5,900",
+    name: "AI Growth Engine",
+    price: "$1,000",
     cadence: "/mo",
-    desc: "Our most popular package for growing teams.",
+    desc: "Your fully automated, humanless growth machine.",
     features: [
-      "Up to 4 AI workflows",
-      "Custom GPT + agents",
-      "Brand identity refresh",
-      "Bi-weekly optimization",
-      "Slack support (24h)",
-      "Quarterly strategy",
+      "Everything in Foundation",
+      "AI Integration into Your Business Tools",
+      "AI Automations & Workflow Setup",
+      "24/7 AI Chatbot (Web + WhatsApp)",
+      "Email Drip & Nurture Sequences",
+      "Full CRM Setup & Integration",
+      "YouTube & TikTok Channel Setup",
+      "20 AI Content Posts /mo",
+      "UGC & Short-Form Video Content",
     ],
-    cta: "Scale with us",
+    cta: "Ignite Growth",
     featured: true,
   },
   {
-    name: "Sovereign",
-    price: "Custom",
-    cadence: "",
-    desc: "Full transformation for ambitious operators.",
-    features: ["Unlimited workflows", "Dedicated AI engineer", "Full brand system", "Weekly war room", "SLA guaranteed"],
-    cta: "Talk to founders",
+    name: "Total Domination",
+    price: "$1,800",
+    cadence: "/mo",
+    desc: "Complete digital domination across every channel.",
+    features: [
+      "Everything in AI Growth Engine",
+      "Google & Meta Ad Management",
+      "Retargeting & Lookalike Campaigns",
+      "Aggressive SEO & Link Building",
+      "YouTube & TikTok Monetization",
+      "AI Marketing Strategy & Funnels",
+      "30 AI Posts + Long-Form /mo",
+      "Priority Debugging & Maintenance",
+      "Dedicated Monthly Strategy Calls",
+    ],
+    cta: "Dominate",
     featured: false,
   },
 ];
@@ -47,12 +69,12 @@ export function Pricing() {
           viewport={{ once: true }}
           className="text-center max-w-2xl mx-auto mb-20"
         >
-          <div className="font-mono text-xs tracking-widest text-primary uppercase mb-6">— Pricing</div>
+          <div className="font-mono text-xs tracking-widest text-primary uppercase mb-6">— Scalable Plans</div>
           <h2 className="font-display text-5xl md:text-7xl font-bold tracking-tighter">
-            Built for <span className="text-gradient italic font-light">retainer.</span>
+            Transparent pricing. <span className="text-gradient italic font-light">Total clarity.</span>
           </h2>
           <p className="mt-6 text-muted-foreground text-lg">
-            No big lump sums. Continuous monthly partnership — cancel anytime after month 3.
+            No sneaky setup fees. No lock-in contracts. Every plan includes hands-on management — cancel anytime.
           </p>
         </motion.div>
 
@@ -73,10 +95,10 @@ export function Pricing() {
             >
               {p.featured && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-background text-primary text-xs font-mono px-4 py-1.5 rounded-full uppercase tracking-widest border border-primary">
-                  Most picked
+                  Most Popular
                 </div>
               )}
-              <div className={`font-display text-2xl font-bold mb-2 ${p.featured ? "" : ""}`}>{p.name}</div>
+              <div className="font-display text-2xl font-bold mb-2">{p.name}</div>
               <p className={`text-sm mb-6 ${p.featured ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
                 {p.desc}
               </p>

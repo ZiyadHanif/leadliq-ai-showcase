@@ -1,14 +1,15 @@
 export function Marquee() {
   const items = [
-    "AI Sales Agents",
-    "Lead Gen Automation",
-    "Brand Identity",
-    "Workflow AI",
-    "Custom GPTs",
-    "Data Pipelines",
-    "Monthly Support",
-    "AI Chatbots",
-    "Voice Agents",
+    "OpenAI",
+    "Claude AI",
+    "Gemini",
+    "n8n",
+    "Make",
+    "WordPress",
+    "NanoBanana",
+    "DaVinci",
+    "YouTube",
+    "TikTok",
   ];
   return (
     <section className="py-12 border-y border-border/50 overflow-hidden bg-background/40">

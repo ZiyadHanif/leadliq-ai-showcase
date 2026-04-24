@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import servicesVisual from "@/assets/services-visual.jpg";
 
 const services = [
   {
@@ -91,22 +92,42 @@ export function Services() {
   return (
     <section id="services" className="relative py-32 md:py-48 px-6 lg:px-10">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl mb-20"
-        >
-          <div className="font-mono text-xs tracking-widest text-primary uppercase mb-6">— What We Do</div>
-          <h2 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] tracking-tighter">
-            Everything your business needs to <span className="text-gradient italic font-light">grow online.</span> Under one roof.
-          </h2>
-          <p className="mt-6 text-muted-foreground text-lg max-w-2xl">
-            AI integration is the spine of everything we ship — website, content, SEO, ads, and video,
-            all working together as one intelligent growth machine.
-          </p>
-        </motion.div>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="font-mono text-xs tracking-widest text-primary uppercase mb-6">— What We Do</div>
+            <h2 className="font-display text-5xl md:text-7xl font-bold leading-[0.95] tracking-tighter">
+              Everything your business needs to <span className="text-gradient italic font-light">grow online.</span> Under one roof.
+            </h2>
+            <p className="mt-6 text-muted-foreground text-lg">
+              AI integration is the spine of everything we ship — website, content, SEO, ads, and video,
+              all working together as one intelligent growth machine.
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, rotate: -3 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="relative"
+          >
+            <div className="absolute -inset-6 bg-primary/20 blur-3xl rounded-full" />
+            <div className="relative rounded-3xl overflow-hidden border border-border/50 glass">
+              <img
+                src={servicesVisual}
+                alt="AI automation dashboard with connected workflow nodes"
+                loading="lazy"
+                width={1024}
+                height={1024}
+                className="w-full h-auto"
+              />
+            </div>
+          </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((s, i) => (

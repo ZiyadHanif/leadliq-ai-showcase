@@ -28,6 +28,13 @@ const workflows = [
     ],
     metric: { value: "4.7x", label: "more qualified leads" },
     stack: ["OpenAI", "Twilio", "HubSpot"],
+    flow: [
+      { label: "Visitor lands", sub: "Site or ad", Icon: Globe },
+      { label: "AI chat qualifies", sub: "Intent + budget", Icon: MessageSquare },
+      { label: "Score & route", sub: "Hot vs cold", Icon: Filter },
+      { label: "Sync to CRM", sub: "HubSpot / GHL", Icon: Database },
+      { label: "Sales notified", sub: "Slack + SMS", Icon: Send },
+    ],
   },
   {
     id: "automation",
@@ -45,6 +52,13 @@ const workflows = [
     ],
     metric: { value: "25h+", label: "saved per week" },
     stack: ["n8n", "Make", "Zapier"],
+    flow: [
+      { label: "Trigger event", sub: "Email / form / API", Icon: Bell },
+      { label: "Parse with AI", sub: "Extract fields", Icon: FileText },
+      { label: "Run logic", sub: "n8n / Make", Icon: Cpu },
+      { label: "Branch actions", sub: "Multi-tool", Icon: GitBranch },
+      { label: "Notify team", sub: "Slack / email", Icon: Send },
+    ],
   },
   {
     id: "reporting",
@@ -62,6 +76,13 @@ const workflows = [
     ],
     metric: { value: "100%", label: "pipeline visibility" },
     stack: ["Looker", "Claude", "Postgres"],
+    flow: [
+      { label: "Pull data", sub: "Ads + CRM + Web", Icon: Database },
+      { label: "Unify & clean", sub: "Postgres warehouse", Icon: GitBranch },
+      { label: "AI analysis", sub: "Claude insights", Icon: Sparkles },
+      { label: "Dashboards", sub: "Live KPIs", Icon: LineChart },
+      { label: "Weekly brief", sub: "Email digest", Icon: Mail },
+    ],
   },
   {
     id: "agent",
@@ -79,6 +100,13 @@ const workflows = [
     ],
     metric: { value: "90%", label: "tickets auto-resolved" },
     stack: ["GPT-4o", "Vapi", "Claude"],
+    flow: [
+      { label: "Inbound", sub: "Call / chat / SMS", Icon: PhoneCall },
+      { label: "Voice + intent", sub: "Whisper + LLM", Icon: Mic },
+      { label: "Reason & retrieve", sub: "Your knowledge", Icon: BrainCircuit },
+      { label: "Take action", sub: "Book / quote / refund", Icon: Cpu },
+      { label: "Human handoff", sub: "When needed", Icon: UserCheck },
+    ],
   },
 ] as const;
 

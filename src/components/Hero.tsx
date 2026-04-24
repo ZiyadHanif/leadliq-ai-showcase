@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import heroOrb from "@/assets/hero-orb.jpg";
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -15,9 +16,17 @@ export function Hero() {
 
   return (
     <section ref={ref} id="top" className="relative min-h-[100svh] flex items-center overflow-hidden grid-bg noise pt-32 pb-20">
+      {/* 3D AI orb visual */}
+      <motion.img
+        src={heroOrb}
+        alt=""
+        aria-hidden
+        style={{ y, opacity, scale: useTransform(scrollYProgress, [0, 1], [1, 1.15]), rotate: useTransform(scrollYProgress, [0, 1], [0, 25]) }}
+        className="absolute top-[8%] right-[-10%] md:right-[-5%] w-[600px] md:w-[850px] max-w-none pointer-events-none mix-blend-screen opacity-80"
+      />
       <motion.div
         style={{ y, opacity }}
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-primary/20 blur-[120px] pointer-events-none animate-pulse-glow"
+        className="absolute top-1/4 left-[10%] w-[500px] h-[500px] rounded-full bg-primary/15 blur-[120px] pointer-events-none animate-pulse-glow"
       />
       <motion.div
         style={{ y: yNeg }}

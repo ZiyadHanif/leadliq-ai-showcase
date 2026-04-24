@@ -21,7 +21,7 @@ export function PainPoints() {
         className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background pointer-events-none" />
-      <div className="max-w-7xl mx-auto">
+      <div className="relative max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
